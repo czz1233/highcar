@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.buyticket.util.MybatisGenerator.mapper.SeatMapper" >
+  <resultMap id="BaseResultMap" type="com.buyticket.util.MybatisGenerator.po.Seat" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="seatType" property="seattype" jdbcType="VARCHAR" />
+    <result column="seatPrice" property="seatprice" jdbcType="DOUBLE" />
+    <result column="seatNum" property="seatnum" jdbcType="INTEGER" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="seat_tno" property="seatTno" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, seatType, seatPrice, seatNum, number, seat_tno
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.buyticket.util.MybatisGenerator.po.SeatExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from seat
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from seat
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from seat
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.buyticket.util.MybatisGenerator.po.SeatExample" >
+    delete from seat
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.buyticket.util.MybatisGenerator.po.Seat" >
+    insert into seat (id, seatType, seatPrice, 
+      seatNum, number, seat_tno
+      )
+    values (#{id,jdbcType=INTEGER}, #{seattype,jdbcType=VARCHAR}, #{seatprice,jdbcType=DOUBLE}, 
+      #{seatnum,jdbcType=INTEGER}, #{number,jdbcType=INTEGER}, #{seatTno,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.buyticket.util.MybatisGenerator.po.Seat" >
+    insert into seat
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="seattype != null" >
+        seatType,
+      </if>
+      <if test="seatprice != null" >
+        seatPrice,
+      </if>
+      <if test="seatnum != null" >
+        seatNum,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="seatTno != null" >
+        seat_tno,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="seattype != null" >
+        #{seattype,jdbcType=VARCHAR},
+      </if>
+      <if test="seatprice != null" >
+        #{seatprice,jdbcType=DOUBLE},
+      </if>
+      <if test="seatnum != null" >
+        #{seatnum,jdbcType=INTEGER},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="seatTno != null" >
+        #{seatTno,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.buyticket.util.MybatisGenerator.po.SeatExample" resultType="java.lang.Integer" >
+    select count(*) from seat
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update seat
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.seattype != null" >
+        seatType = #{record.seattype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seatprice != null" >
+        seatPrice = #{record.seatprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.seatnum != null" >
+        seatNum = #{record.seatnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=INTEGER},
+      </if>
+      <if test="record.seatTno != null" >
+        seat_tno = #{record.seatTno,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update seat
+    set id = #{record.id,jdbcType=INTEGER},
+      seatType = #{record.seattype,jdbcType=VARCHAR},
+      seatPrice = #{record.seatprice,jdbcType=DOUBLE},
+      seatNum = #{record.seatnum,jdbcType=INTEGER},
+      number = #{record.number,jdbcType=INTEGER},
+      seat_tno = #{record.seatTno,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.buyticket.util.MybatisGenerator.po.Seat" >
+    update seat
+    <set >
+      <if test="seattype != null" >
+        seatType = #{seattype,jdbcType=VARCHAR},
+      </if>
+      <if test="seatprice != null" >
+        seatPrice = #{seatprice,jdbcType=DOUBLE},
+      </if>
+      <if test="seatnum != null" >
+        seatNum = #{seatnum,jdbcType=INTEGER},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="seatTno != null" >
+        seat_tno = #{seatTno,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.buyticket.util.MybatisGenerator.po.Seat" >
+    update seat
+    set seatType = #{seattype,jdbcType=VARCHAR},
+      seatPrice = #{seatprice,jdbcType=DOUBLE},
+      seatNum = #{seatnum,jdbcType=INTEGER},
+      number = #{number,jdbcType=INTEGER},
+      seat_tno = #{seatTno,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

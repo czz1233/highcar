@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.buyticket.bean.mapper.TrainMapper" >
+  <insert id="addTrain" parameterType="Train">
+     insert into train(train_tno, start, end, startTime, endTime,totle,order_ticket)
+     values(#{train_tno},#{start},#{end},#{startTime},#{endTime},#{totle})
+  </insert>
+  <select id="selectTrains" resultType="Train">
+    select * from train
+  </select>
+
+    <select id="viewTrain" parameterType="int" resultType="Train">
+        select * from train where id=#{id}
+    </select>
+    <delete id="deleteTrain" parameterType="int">
+        delete from Train where id = #{id}
+    </delete>
+
+    <update id="updateTrain" parameterType="Train">
+        update train set train_tno = #{train_tno}, start =#{start},
+        end =#{end}, startTime=#{startTime}, endTime=#{endTime},
+        totle=#{totle}
+        where id = #{id}
+    </update>
+    <select id="seachForTrain" parameterType="Train" resultType="Train">
+        select * from train where train_tno=#{train_tno} and start = #{start} and end=#{end} and startTime = #{startTime}
+    </select>
+    <select id="seachbytic" parameterType="Train" resultType="Train">
+        select * from train where start = #{start} and end=#{end} and startTime = #{startTime}
+    </select>
+</mapper>

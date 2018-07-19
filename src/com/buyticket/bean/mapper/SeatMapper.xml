@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.buyticket.bean.mapper.SeatMapper" >
+  <insert id="addSeat" parameterType="Seat">
+    insert into seat(seatType, seatPrice, seatNum, train_tno, seat_tno)
+    values(#{seatType},#{seatPrice},#{seatNum},#{train_tno},#{seat_tno})
+  </insert>
+  <select id="selectSeats" resultType="Seat">
+    select * from seat
+  </select>
+  <select id="viewSeat" parameterType="int" resultType="Seat">
+    select * from seat where id=#{id}
+  </select>
+  <delete id="deleteSeat" parameterType="int">
+    delete from seat where id = #{id}
+  </delete>
+  <update id="updateSeat" parameterType="Seat">
+    update seat set seatType = #{seatType}, seatPrice =#{seatPrice},
+    seatNum =#{seatNum}, train_tno=#{train_tno}, seat_tno=#{seat_tno}
+    where id = #{id}
+  </update>
+  <select id="seachbytrainid" parameterType="java.lang.String" resultType="Seat">
+    select * from seat where train_tno=#{train_tno}
+  </select>
+</mapper>

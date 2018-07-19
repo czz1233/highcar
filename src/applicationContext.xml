@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+	<bean id="dataSourceFactory" class="com.buyticket.dao.myDataSourceFactory"/>
+	<bean id="DataSource" factory-bean="dataSourceFactory" factory-method="getDataSource"/>
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:MyBatisConfig.xml"></property>
+		<property name="dataSource" ref="DataSource" />
+		<property name="mapperLocations">
+			<array value-type="java.lang.String">
+				<value>classpath:com/buyticket/bean/mapper/*.xml</value>
+			</array>
+		</property>
+	</bean>
+	<bean id="SqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory"></constructor-arg>
+	</bean>
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.buyticket.bean.mapper"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+	<bean id="userService" class="com.buyticket.service.Impl.UserServiceImpl"></bean>
+	<bean id="trainService" class="com.buyticket.service.Impl.TrainServiceImpl"></bean>
+	<bean id="seatService" class="com.buyticket.service.Impl.SeatServiceImpl"></bean>
+</beans>
+

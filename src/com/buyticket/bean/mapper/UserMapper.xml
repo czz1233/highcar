@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.buyticket.bean.mapper.UserMapper" >
+  <insert id="insertUser" parameterType="User">
+    insert into user(name, username, password,sex, birthday, identity_code, address, mobile, email, role)
+    values(#{name},#{username},#{password},#{sex},#{birthday},#{identity_code},#{address},#{mobile},#{email},#{role})
+  </insert>
+  <select id="selectUsers" resultType="User">
+    select * from user
+  </select>
+  <delete id="deleteUser" parameterType="int">
+    delete from user where user_id = #{user_id}
+  </delete>
+  <select id="selectUserbyusername" parameterType="User" resultType="User">
+    select * from user where username = #{username}
+  </select>
+  <select id="selectUserbysex" parameterType="User" resultType="User">
+    select * from user where sex = #{sex}
+  </select>
+  <select id="selectUserbyusernamesex" parameterType="User" resultType="User">
+    select * from user where username = #{username} and sex = #{sex}
+  </select>
+
+  <select id="viewUser" parameterType="int" resultType="User">
+    select * from user where user_id=#{user_id}
+  </select>
+
+  <update id="updateUser" parameterType="User">
+    update user set name = #{name}, username =#{username},
+    password =#{password}, sex=#{sex}, birthday=#{birthday},
+    identity_code=#{identity_code}, address=#{address},
+    mobile=#{mobile}, email=#{email}, role=#{role}
+    where user_id = #{user_id}
+  </update>
+</mapper>

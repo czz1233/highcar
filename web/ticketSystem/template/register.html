@@ -1,0 +1,157 @@
+﻿
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>易买网 - 首页</title>
+<link type="text/css" rel="stylesheet" href="../static/css/Style.css" />
+<script type="text/javascript" src="../static/js/function.js"></script>
+<!-- <script type="text/javascript" src="js/jquery-1.8.3.js"></script> -->
+<script language="javascript" type="text/javascript" src="../static/js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$(".row").mouseover(function(){
+			$(this).css('background-color','#FFE6FF');
+		})
+		$(".row").mouseout(function(){
+			$(this).css('background-color','white');
+		})
+		
+	})
+	function f1(){
+		var uid=document.getElementById("uid").value;
+		var name=document.getElementById("name").value;
+		var password=document.getElementById("password").value;
+		var rePassWord=document.getElementById("rePassWord").value;
+		var sex=document.getElementById("sex").value;
+		var birthday=document.getElementById("birthday").value;
+		var button=document.getElementById("button");
+		var submit=document.getElementById("submit");
+		var identity_code=document.getElementById("identity_code").value;
+		var email=document.getElementById("email").value;
+		var mobile=document.getElementById("mobile").value;
+		if(uid==""||name==""||password==""||rePassWord==""||sex==""||birthday==""){
+			alert("带*位置不能为空");
+		}else{
+			/* $("#button").style("display","none"); */
+			    //ID
+			    var reg=/^[a-zA-Z0-9_-]{4,16}$/;
+			    //name
+			    var reg1=/^[\u4E00-\u9FA5A-Za-z0-9_]{4,16}$/;
+			    //密码
+			    var reg2=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,10}$/;
+			    //邮箱
+			    var reg3=/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+			    //电话号码
+			    var reg5=/^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
+			    //身份证
+		    	var reg4=/^\d{15}|\d{18}$/;
+				if(!reg.test(uid)){
+					alert("用户ID必须4到16位（字母，数字，下划线，减号）");
+				}else if(!reg1.test(name)){
+					alert("用户名格式必须4到16位（字母，数字，下划线，汉字）");
+				}else if(!reg2.test(password)){
+					alert("密码必须包含大小写字母和数字的组合，不能使用特殊字符，长度在6-10之间");
+				}else if(email!=""){
+						if(!reg3.test(email)){
+							alert("请按正确方式填写邮箱");
+						}
+				}else if(identity_code!=""){
+					if(!reg4.test(identity_code)){
+						alert("身份证只能为15位或者18位");
+					}
+				}else if(mobile!=""){
+					if(!reg5.test(mobile)){
+						alert("请输入正确的电话号码");
+					}
+				}else{
+					button.style.display="none";
+					alert("欢迎您，请再次提交");
+					submit.style.display="block";
+				}
+			
+		}
+	}	
+	
+		
+	
+</script>
+</head>
+<body>
+
+<div id="register" class="wrap">
+	<div class="shadow">
+		<em class="corner lb"></em>
+		<em class="corner rt"></em>
+		<div class="box">
+			<h1>欢迎注册Low版高铁票务系统</h1>
+			<ul class="steps clearfix">
+				<li class="current"><em></em>填写注册信息</li>
+				<li class="last"><em></em>注册成功</li>
+			</ul>
+			<form id="regForm"  name="myform" method="post" action="register.do" onsubmit="return checkForm(this) ;">
+				<table>
+					<tr class="row">
+						<td class="field">*姓名：</td>
+						<td><input type="text" class="text" name="name" id="Iname" onfocus="FocusItem(this)" onblur="CheckItem(this);"/><span></span></td>
+					
+					</tr>
+					<tr class="row">
+						<td class="field">*用户名：</td>
+						<td><input type="text" class="text" name="username" id="name" onfocus="FocusItem(this)" onblur="CheckItem(this);"/><span></span></td>
+					
+					</tr>
+					<tr class="row">
+						<td class="field">*密码：</td>
+						<td><input type="text" class="text" id="password" name="password" onfocus="FocusItem(this)" onblur="CheckItem(this);"/><span></span></td>
+					</tr>
+					
+					<tr class="row">
+						<td class="field">*确认密码：</td>
+						<td><input class="text" type="password" id="rePassWord" onfocus="FocusItem(this)" onblur="CheckItem(this);" /><span></span></td>
+					</tr>
+					<tr class="row">
+						<td class="field">*性别：</td>
+						<td><input type="radio" name="sex" value="男" id="sex" onfocus="FocusItem(this)" onblur="CheckItem(this);"/>男<input type="radio" name="sex" value="女" onfocus="FocusItem(this)" onblur="CheckItem(this);"/>女<span></span></td>
+					</tr>
+					<tr class="row">
+						<td class="field">*生日：</td>
+						<td>
+							<input type ="text" readonly="readonly"   id="birthday" class="Wdate" onClick="WdatePicker()" name = "birthday" onfocus="FocusItem(this)" onblur="CheckItem(this);"/><span></span>
+						</td>
+					</tr>
+					<tr class="row">
+						<td class="field">*身份证号码：</td>
+						<td><input type="text" class="text" name="identity_code" id="identity_code" onfocus="FocusItem(this)" onblur="CheckItem(this);"/><span></span></td>
+					</tr>
+						<tr class="row">
+						<td class="field">*手机号码：</td>
+						<td><input type="text" class="text" name="mobile" id="mobile" onfocus="FocusItem(this)" onblur="CheckItem(this);"/><span></span></td>
+					</tr>
+					<tr class="row">
+						<td class="field">Email：</td>
+						<td><input type="text" class="text" name="email"  id="email" onfocus="FocusItem(this)" onblur="CheckItem(this);"/><span></span></td>
+					</tr>
+				
+					<tr class="row">
+						<td class="field">地址：</td>
+						<td><input type="text" class="text" name="address"onfocus="FocusItem(this)" onblur="CheckItem(this);"/><span></span></td>
+					</tr>
+					<tr class="row">
+						<td class="field">身份</td>
+						<td><input type="text" class="text" name="role" value="普通用户" readonly="readonly" onfocus="FocusItem(this)" onblur="CheckItem(this);"/><span></span></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><label class="ui-blue"><input type="submit" name="submit" onclick="myform.submit()" value="确定" id="submit"/></label></td>
+					</tr>
+				</table>
+			</form>
+			
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+<div id="footer">
+</div>
+</body>
+</html>
